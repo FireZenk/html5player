@@ -1,1 +1,67 @@
-My GitHub Page
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HTML5 Audio player</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- HTML5 Player -->
+<link rel="stylesheet" type="text/css" href="css/html5player.min.css">
+<!-- Rainbow -->
+<link rel="stylesheet" type="text/css" href="css/rainbow.min.css">
+<!-- Style -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <header>
+  <h3>HTML5 Audio player</h3> <p>Fully featured music player only 12kb!</p>
+        <a href="https://github.com/FireZenk/html5player"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+  </header>
+  <div class="content">
+  	
+  	<div class="audio-set">
+        <audio id="player" src="music/sample.mp3" loop="" controlls="controlls" ontimeupdate="zTimeUpdate()"></audio>
+              
+        <button onclick="zPlay()" class="audio-play"><icon>play</icon></button>
+        <button onclick="zPause()" class="audio-pause"><icon>pause</icon></button>
+        <span id="currenttime" class="audio-currenttime">0:00</span>
+        <progress id="time" class="audio-time" value="0" max="0"></progress>
+        <span id="totaltime" class="audio-totaltime">0:00</span>
+        <button onclick="zMute()" class="audio-mute"><icon>volumeoff</icon></button>
+        <button onclick="zVolumeDown()" class="audio-vdown"><icon>volumedown</icon></button>
+        <button onclick="zVolumeUp()" class="audio-vup"><icon>volumeup</icon></button>
+    </div>
+
+    <p>Import code:</p>
+    <pre><code data-language="html">
+      <link rel="stylesheet" type="text/css" href="css/html5player.min.css">
+      <script src="js/html5player.min.js"></script>
+    </code></pre>
+
+    <p>HTML5 code:</p>
+    <pre><code data-language="html">
+      <div class="audio-set">
+        <audio id="player" src="music/sample.mp3" loop="" controlls="controlls" ontimeupdate="zTimeUpdate()"></audio>        
+        <button onclick="zPlay()" class="audio-play"><icon>play</icon></button>
+        <button onclick="zPause()" class="audio-pause"><icon>pause</icon></button>
+        <span id="currenttime" class="audio-currenttime">0:00</span>
+        <progress id="time" class="audio-time" value="0" max="0"></progress>
+        <span id="totaltime" class="audio-totaltime">0:00</span>
+        <button onclick="zMute()" class="audio-mute"><icon>volumeoff</icon></button>
+        <button onclick="zVolumeDown()" class="audio-vdown"><icon>volumedown</icon></button>
+        <button onclick="zVolumeUp()" class="audio-vup"><icon>volumeup</icon></button>
+      </div>
+    </code></pre>
+
+    <a href="css/html5player.min.css"><button>Download css <icon>download</icon></button></a>
+    <a href="js/html5player.min.js"><button>Download js <icon>download</icon></button></a>
+    <a href="https://github.com/FireZenk/html5player"><button>Source code <icon>external</icon></button></a>
+
+    <br/><br/>
+  </div>
+  <footer>
+  HTML5 Audio player, 2013 &copy; FireZenk
+  </footer>
+  <script src="js/html5player.min.js"></script>
+  <script src="js/rainbow.min.js"></script>
+</body>
+</html>
