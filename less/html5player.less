@@ -1,0 +1,256 @@
+/**
+ * Html5player.less
+ *
+ * @project HTML5 Audio player
+ * @version 1.0
+ * @author Jorge Garrido Oval, firezenk@gmail.com
+ * @copyright 2013
+ * @license MIT
+ */
+
+// Variables
+@audio_gradient_base:				#fff;
+@audio_gradient_target:				#e5e0e4;
+@audio_border_color:				#979797;
+@audio_nums_color:					#979797;
+@audio_progress_width:				150px;
+@audio_progress_height: 			17px;
+
+@progress_height:					20px;
+@progress_border_color:				#979797;
+@progress_border_radius:			50px;
+@progress_outer_gradient_base:		#fff;
+@progress_outer_gradient_target:	#e5e0e4;
+@progress_inner_gradient_base:		#fff;
+@progress_inner_gradient_target:	#f7f7f7;
+@progress_stripes_start_color:		#fff;
+@progress_stripes_stop_color:		#e5e0e4;
+
+@button_gradient_base:				#fff;
+@button_gradient_target:			#e5e0e4;
+@button_text_color:					#979797;
+@button_border_color:				#979797;
+
+@font_weight_normal: 				400;
+@font_icon_size:					36px;
+
+// Functions
+.gradient (@startColor: #eee, @endColor: white) {
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+	background-color: @startColor;
+}
+
+.border-radius (@radius: 5px) {
+	-webkit-border-radius:   @radius;
+	-moz-border-radius:      @radius;
+	border-radius:         	 @radius;
+	-webkit-background-clip: padding-box;
+	-moz-background-clip:    padding;
+	background-clip:         padding-box;
+}
+
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+
+.striped-bar (@start_color, @stop_color) {		
+
+	background-color: @stop_color;
+
+	background-image: -webkit-gradient(linear, left top, right bottom,
+						color-stop(.25, @start_color), color-stop(.25, transparent),
+						color-stop(.5, transparent), color-stop(.5, @start_color),
+						color-stop(.75, @start_color), color-stop(.75, transparent),
+						to(transparent));
+	background-image: -webkit-linear-gradient(135deg, @start_color 25%, transparent 25%,
+						transparent 50%, @start_color 50%, @start_color 75%,
+						transparent 75%, transparent);
+	background-image: -moz-linear-gradient(135deg, @start_color 25%, transparent 25%,
+						transparent 50%, @start_color 50%, @start_color 75%,
+						transparent 75%, transparent);
+	background-image: -ms-linear-gradient(135deg, @start_color 25%, transparent 25%,
+						transparent 50%, @start_color 50%, r@start_color 75%,
+						transparent 75%, transparent);
+	background-image: -o-linear-gradient(135deg, @start_color 25%, transparent 25%,
+						transparent 50%, @start_color 50%, @start_color 75%,
+						transparent 75%, transparent);
+	background-image: linear-gradient(135deg, @start_color 25%, transparent 25%,
+						transparent 50%, @start_color 50%, @start_color 75%,
+						transparent 75%, transparent);
+	background-size: 30px 30px;            
+	
+	-webkit-animation: 	animate-stripes 3s linear infinite;
+	-moz-animation: 	animate-stripes 3s linear infinite;   
+	-ms-animation:  	animate-stripes 3s linear infinite;
+	-webkit-background-size: 30px 30px;
+	-moz-background-size: 30px 30px; 	
+	-ms-background-size: 30px 30px; 	
+}
+
+@-webkit-keyframes animate-stripes { 
+	0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
+@-moz-keyframes animate-stripes {
+	0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
+.button-mixin {
+	color: 			@button_text_color;
+	font-weight: 	@font_weight_normal;
+	background: 	transparent;
+
+	&:hover {
+		.gradient(@button_gradient_target, @button_gradient_target);
+		.inner-shadow;
+	}
+	.border-radius;
+}
+
+.antialias {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.rendering {
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'LigatureSymbols';
+    src: url('LigatureSymbols.eot');
+    src: url('LigatureSymbols.eot?#iefix') format('embedded-opentype'),
+         url('LigatureSymbols.woff') format('woff'),
+         url('LigatureSymbols.ttf') format('truetype'),
+         url('LigatureSymbols.svg#LigatureSymbols') format('svg');
+    src: url('LigatureSymbols.ttf') format('truetype');
+}
+
+// Main
+.audio-set {
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	border:	 1px solid @audio_border_color;
+	.gradient(@audio_gradient_base, @audio_gradient_target);
+	.border-radius!important;
+
+	.audio-play {
+		padding-left: 5px;
+		padding-right: 5px;
+		border:	0px;
+	}
+
+	.audio-pause {
+		padding-left: 5px;
+		padding-right: 5px;
+		border:	0px;
+	}
+
+	.audio-mute {
+		padding-left: 5px;
+		padding-right: 5px;
+		border:	0px;
+	}
+
+	.audio-vup {
+		padding-left: 5px;
+		padding-right: 5px;
+		border:	0px;
+	}
+
+	.audio-vdown {
+		padding-left: 5px;
+		padding-right: 5px;
+		border:	0px;
+	}
+
+	.audio-currenttime, .audio-totaltime {
+		color: @audio_nums_color;
+	}
+
+	.audio-time {
+		border: 0px;
+		height: @audio_progress_height;
+		width: @audio_progress_width;
+	}
+}
+
+progress {
+	padding: 			0px;
+	height: 			@progress_height;
+	border:				1px solid @progress_border_color;
+	appearance: 		none;
+	-moz-appearance: 	none;
+	-webkit-appearance: none;
+	.border-radius(@progress_border_radius);
+	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
+}
+
+// Background of the progress bar background
+progress[role]:after {
+	background-image: none;
+	.border-radius(@progress_border_radius);
+	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
+	.inner-shadow();
+}
+progress {
+	background: transparent !important;
+	.border-radius(@progress_border_radius);
+	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
+	.inner-shadow();
+}
+progress::-webkit-progress-bar {
+	background: transparent;
+	.border-radius(@progress_border_radius);
+	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
+	.inner-shadow();
+}
+
+// Background of the progress bar value
+progress::-moz-progress-bar {
+	border:	1px solid @progress_border_color;
+	.border-radius(@progress_border_radius);
+	.striped-bar(@progress_stripes_start_color, @progress_stripes_stop_color);
+}
+progress::-webkit-progress-value {
+	border:	1px solid @progress_border_color;
+	.border-radius(@progress_border_radius);
+	.striped-bar(@progress_stripes_start_color, @progress_stripes_stop_color);
+}
+progress[aria-valuenow]:before {
+	border:	1px solid @progress_border_color;
+	.border-radius(@progress_border_radius);
+	.striped-bar(@progress_stripes_start_color, @progress_stripes_stop_color);
+}
+
+icon {
+  font-size:    @font_icon_size;
+  font-family:  'LigatureSymbols';
+  .rendering;
+  .antialias;
+}
+
+button {
+	icon {
+		font-size: 150%;
+	}
+	margin-top: 2px;
+	margin-bottom: 2px;
+	.button-mixin;
+}
