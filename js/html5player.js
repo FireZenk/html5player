@@ -2,11 +2,15 @@
  * Html5player.js
  *
  * @project HTML5 Audio player
- * @version 1.0
+ * @version 1.1
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
  */
+
+// Use your own key
+var lastfmAPIkey = "bf7528310d7bdbb8584e57244cdb549b"; 
+
 var zPlayer = document.getElementById('player');
 
 function zMute() {
@@ -34,6 +38,9 @@ function zTimeUpdate() {
   document.getElementById('totaltime').innerHTML = convertTime(Math.floor(zPlayer.duration));
   document.getElementById('time').value = Math.floor(zPlayer.currentTime);
   document.getElementById('time').max = Math.floor(zPlayer.duration);
+
+  if(zPlayer.currentTime>=zPlayer.duration)
+    zAlbumArt();
 }
 
 function convertTime(sec) {
@@ -45,3 +52,48 @@ function convertTime(sec) {
   if(hrs!=0) return hrs + ":" + min + ":" + sec;
   else return min + ":" + sec;
 }
+
+function zAlbumArt() {
+
+  var currentArtist = zPlayer.getAttribute('data-artist');
+  document.getElementById('artist').innerHTML = "Artist: "+currentArtist;
+
+  var currentAlbum = zPlayer.getAttribute('data-album');
+  document.getElementById('album').innerHTML = "Album: "+currentAlbum;
+
+  var url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+
+    lastfmAPIkey+"&artist="+
+    currentArtist+"&album="+
+    currentAlbum;
+
+  var xmlhttp;
+  var txt,x,xx,i;
+
+  if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
+  else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+  xmlhttp.onreadystatechange = function() {
+
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      x = xmlhttp.responseXML.documentElement.getElementsByTagName("album");
+
+      for (i = 0; i<x.length; i++) {
+        xx = x[i].getElementsByTagName("image");
+          
+        try {
+          txt = "<img src='" + xx[1].firstChild.nodeValue + "'/>";
+        } catch (er) {}
+      }
+      document.getElementById('art').innerHTML = txt;
+    }
+  }
+
+  xmlhttp.open("GET",url,true);
+  xmlhttp.send();
+}
+
+
+
+
+
+

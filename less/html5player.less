@@ -48,9 +48,29 @@
 	-webkit-border-radius:   @radius;
 	-moz-border-radius:      @radius;
 	border-radius:         	 @radius;
+	background-clip:         padding-box;
 	-webkit-background-clip: padding-box;
 	-moz-background-clip:    padding;
+}
+
+.border-radiuses (@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+	-webkit-border-top-left-radius:     @topleft;
+	-moz-border-radius-topleft:         @topleft;
+	border-top-left-radius:             @topleft;
+	-webkit-border-top-right-radius:    @topright;
+
+	-moz-border-radius-topright:        @topright;
+	border-top-right-radius:            @topright;
+	-webkit-border-bottom-right-radius: @bottomright;
+	-moz-border-radius-bottomright:     @bottomright;
+	border-bottom-right-radius:         @bottomright;
+	-webkit-border-bottom-left-radius:  @bottomleft;
+	-moz-border-radius-bottomleft:      @bottomleft;
+	border-bottom-left-radius:          @bottomleft; 
 	background-clip:         padding-box;
+
+	-moz-background-clip:    padding; 
+	-webkit-background-clip: padding-box; 
 }
 
 .inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
@@ -102,15 +122,15 @@
 }
 
 .button-mixin {
+	.border-radius;
+	background: 	transparent;
 	color: 			@button_text_color;
 	font-weight: 	@font_weight_normal;
-	background: 	transparent;
 
 	&:hover {
 		.gradient(@button_gradient_target, @button_gradient_target);
 		.inner-shadow;
 	}
-	.border-radius;
 }
 
 .antialias {
@@ -143,40 +163,38 @@
 
 // Main
 .audio-set {
-	display: inline-block;
-	padding-left: 5px;
-	padding-right: 5px;
-	border:	 1px solid @audio_border_color;
 	.gradient(@audio_gradient_base, @audio_gradient_target);
 	.border-radius!important;
+	display: inline-block;
+	padding-right: 5px;
+	padding-left: 5px;
+	border:	 1px solid @audio_border_color;
 
-	.audio-play {
-		padding-left: 5px;
-		padding-right: 5px;
-		border:	0px;
+	.audio-art {
+		float: left;
+		margin-top: 5px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+		width: 64px;
+		height: 64px;
+		background-color: #696969;
 	}
 
-	.audio-pause {
-		padding-left: 5px;
-		padding-right: 5px;
-		border:	0px;
+	.audio-progress {
+		display: block;
+		float: left;
+		margin-top: 5px;
+		text-align: center;
 	}
 
-	.audio-mute {
-		padding-left: 5px;
-		padding-right: 5px;
-		border:	0px;
+	.audio-controlls {
+		display: block;
+		text-align: center;
 	}
 
-	.audio-vup {
-		padding-left: 5px;
-		padding-right: 5px;
-		border:	0px;
-	}
-
-	.audio-vdown {
-		padding-left: 5px;
-		padding-right: 5px;
+	.audio-play, .audio-pause, .audio-mute, .audio-vup, .audio-vdown {
+		margin-top: 14px;
+		width: 14.4%;
 		border:	0px;
 	}
 
@@ -185,72 +203,93 @@
 	}
 
 	.audio-time {
-		border: 0px;
-		height: @audio_progress_height;
 		width: @audio_progress_width;
+		height: @audio_progress_height;
+		border: 0px;
+	}
+
+	.audio-info {
+		
+		.border-radiuses(0,4px,4px,0);
+		display: block;
+		float: right;
+		margin-top: 5px;
+		margin-bottom: 4px;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		width: 100%;
+		background-color: #696969;
+
+		span {
+			display: block;
+			margin-left: 5px;
+			color: @audio_nums_color;
+			text-align: left;
+			font-size: 10px;
+		}
 	}
 }
 
 progress {
+	.border-radius(@progress_border_radius);
+	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
 	padding: 			0px;
 	height: 			@progress_height;
 	border:				1px solid @progress_border_color;
 	appearance: 		none;
 	-moz-appearance: 	none;
 	-webkit-appearance: none;
-	.border-radius(@progress_border_radius);
-	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
 }
 
 // Background of the progress bar background
 progress[role]:after {
-	background-image: none;
 	.border-radius(@progress_border_radius);
 	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
 	.inner-shadow();
+	background-image: none;
 }
 progress {
-	background: transparent !important;
 	.border-radius(@progress_border_radius);
 	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
 	.inner-shadow();
+	background: transparent !important;
 }
 progress::-webkit-progress-bar {
-	background: transparent;
 	.border-radius(@progress_border_radius);
 	.gradient(@progress_outer_gradient_base, @progress_outer_gradient_target);
 	.inner-shadow();
+	background: transparent;
 }
 
 // Background of the progress bar value
 progress::-moz-progress-bar {
-	border:	1px solid @progress_border_color;
 	.border-radius(@progress_border_radius);
 	.striped-bar(@progress_stripes_start_color, @progress_stripes_stop_color);
+	border:	1px solid @progress_border_color;
 }
 progress::-webkit-progress-value {
-	border:	1px solid @progress_border_color;
 	.border-radius(@progress_border_radius);
 	.striped-bar(@progress_stripes_start_color, @progress_stripes_stop_color);
+	border:	1px solid @progress_border_color;
 }
 progress[aria-valuenow]:before {
-	border:	1px solid @progress_border_color;
 	.border-radius(@progress_border_radius);
 	.striped-bar(@progress_stripes_start_color, @progress_stripes_stop_color);
+	border:	1px solid @progress_border_color;
 }
 
 icon {
-  font-size:    @font_icon_size;
-  font-family:  'LigatureSymbols';
   .rendering;
   .antialias;
+  font-size:    @font_icon_size;
+  font-family:  'LigatureSymbols';
 }
 
 button {
+	.button-mixin;
+	margin-top: 2px;
+	margin-bottom: 2px;
 	icon {
 		font-size: 150%;
 	}
-	margin-top: 2px;
-	margin-bottom: 2px;
-	.button-mixin;
 }
