@@ -2,43 +2,58 @@
  * Html5player.js
  *
  * @project HTML5 Audio player
- * @version 1.1
+ * @version 1.2
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
  */
+var lastfmAPIkey="bf7528310d7bdbb8584e57244cdb549b";
 
-// Use your own key
-var lastfmAPIkey = "bf7528310d7bdbb8584e57244cdb549b"; 
+var zPlayer=document.getElementById("player");
 
-var zPlayer = document.getElementById('player');
+var isPlaying=false;
+
+document.addEventListener("DOMContentLoaded",function() {
+  zAlbumArt()
+},false);
 
 function zMute() {
-  zPlayer.muted = !zPlayer.muted;
+  zPlayer.muted=!zPlayer.muted;
 }
 
-function zPlay() {
-  zPlayer.play();
+function zPlayPause() {
+  if(isPlaying) {
+    document.getElementById("play").innerHTML="<icon>play</icon>";
+    zPlayer.pause();
+  } else {
+    document.getElementById("play").innerHTML="<icon>pause</icon>";
+    zPlayer.play();
+  }
+  isPlaying=!isPlaying;
 }
 
-function zPause() {
+function zStop() {
+  document.getElementById("play").innerHTML="<icon>play</icon>";
   zPlayer.pause();
+  zPlayer.currentTime=0;
+  isPlaying=false;
+  zTimeUpdate();
 }
 
 function zVolumeUp() {
-  zPlayer.volume+=0.1;
+  zPlayer.volume+=.1;
 }
 
 function zVolumeDown() {
-  zPlayer.volume-=0.1;
+  zPlayer.volume-=.1;
 }
 
 function zTimeUpdate() {
-  document.getElementById('currenttime').innerHTML = convertTime(Math.floor(zPlayer.currentTime));
-  document.getElementById('totaltime').innerHTML = convertTime(Math.floor(zPlayer.duration));
-  document.getElementById('time').value = Math.floor(zPlayer.currentTime);
-  document.getElementById('time').max = Math.floor(zPlayer.duration);
-
+  document.getElementById("currenttime").innerHTML=convertTime(Math.floor(zPlayer.currentTime));
+  document.getElementById("totaltime").innerHTML=convertTime(Math.floor(zPlayer.duration));
+  document.getElementById("time").value=Math.floor(zPlayer.currentTime);
+  document.getElementById("time").max=Math.floor(zPlayer.duration);
+  
   if(zPlayer.currentTime>=zPlayer.duration)
     zAlbumArt();
 }
@@ -91,9 +106,3 @@ function zAlbumArt() {
   xmlhttp.open("GET",url,true);
   xmlhttp.send();
 }
-
-
-
-
-
-

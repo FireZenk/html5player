@@ -2,7 +2,7 @@
  * Html5player.less
  *
  * @project HTML5 Audio player
- * @version 1.1
+ * @version 1.2
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
@@ -105,7 +105,7 @@
   text-align: center;
 }
 .audio-set .audio-play,
-.audio-set .audio-pause,
+.audio-set .audio-stop,
 .audio-set .audio-mute,
 .audio-set .audio-vup,
 .audio-set .audio-vdown {
