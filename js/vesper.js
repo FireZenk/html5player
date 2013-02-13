@@ -1,8 +1,8 @@
 /**
  * Html5player.js
  *
- * @project Vesper HTML5 Audio player
- * @version 1.3
+ * @project HTML5 Audio player
+ * @version 1.2
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
@@ -14,7 +14,7 @@ var zPlayer=document.getElementById("player");
 var isPlaying=false;
 
 document.addEventListener("DOMContentLoaded",function() {
-  zAlbumArt()
+  zAlbumArt();
 },false);
 
 function zMute() {
@@ -96,12 +96,12 @@ function zAlbumArt() {
         xx = x[i].getElementsByTagName("image");
           
         try {
-          txt = "<img src='" + xx[1].firstChild.nodeValue + "'/>";
+          txt = "<div style='background-image: url("+ xx[1].firstChild.nodeValue +");background-repeat: no-repeat;'></div>";
         } catch (er) {}
       }
       document.getElementById('art').innerHTML = txt;
     }
-  }
+  };
 
   xmlhttp.open("GET",url,true);
   xmlhttp.send();
