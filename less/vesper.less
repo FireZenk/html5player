@@ -2,11 +2,13 @@
  * Vesper.less
  *
  * @project Vesper: HTML5 Audio player
- * @version 1.3
+ * @version 1.3.1
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
  */
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400&.css");
 
 // Variables
 @audio_gradient_base:				#fff;
@@ -123,7 +125,7 @@
 
 .button-mixin {
 	.border-radius;
-	background: 	transparent;
+	.gradient(@button_gradient_base, @button_gradient_target);
 	color: 			@button_text_color;
 	font-weight: 	@font_weight_normal;
 
@@ -169,6 +171,7 @@
 	padding-left: 5px;
 	height: 111px;
 	border:	 1px solid @audio_border_color;
+	font-family:'Open Sans',sans-serif;
 
 	.audio-art {
 		.border-radiuses(0,0,0,4px);

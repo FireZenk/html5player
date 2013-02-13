@@ -1,8 +1,9 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400&.css");
 /**
  * Vesper.less
  *
  * @project Vesper: HTML5 Audio player
- * @version 1.3
+ * @version 1.3.1
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
@@ -30,7 +31,12 @@
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
-  background: transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5e0e4));
+  background: -webkit-linear-gradient(top, #ffffff, #e5e0e4);
+  background: -moz-linear-gradient(top, #ffffff, #e5e0e4);
+  background: -ms-linear-gradient(top, #ffffff, #e5e0e4);
+  background: -o-linear-gradient(top, #ffffff, #e5e0e4);
+  background-color: #ffffff;
   color: #979797;
   font-weight: 400;
 }
@@ -79,6 +85,7 @@
   padding-left: 5px;
   height: 111px;
   border: 1px solid #979797;
+  font-family: 'Open Sans', sans-serif;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -388,7 +395,12 @@ button {
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding;
-  background: transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5e0e4));
+  background: -webkit-linear-gradient(top, #ffffff, #e5e0e4);
+  background: -moz-linear-gradient(top, #ffffff, #e5e0e4);
+  background: -ms-linear-gradient(top, #ffffff, #e5e0e4);
+  background: -o-linear-gradient(top, #ffffff, #e5e0e4);
+  background-color: #ffffff;
   color: #979797;
   font-weight: 400;
   margin-top: 2px;
