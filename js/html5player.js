@@ -1,8 +1,8 @@
 /**
  * Html5player.js
  *
- * @project HTML5 Audio player
- * @version 1.2
+ * @project Vesper HTML5 Audio player
+ * @version 1.3
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
