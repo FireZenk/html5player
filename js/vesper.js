@@ -1,8 +1,8 @@
 /**
- * Html5player.js
+ * Vesper.js 
  *
- * @project HTML5 Audio player
- * @version 1.2
+ * @project Vesper
+ * @version 1.5
  * @author Jorge Garrido Oval, firezenk@gmail.com
  * @copyright 2013
  * @license MIT
@@ -12,10 +12,6 @@ var lastfmAPIkey="bf7528310d7bdbb8584e57244cdb549b";
 var zPlayer=document.getElementById("player");
 
 var isPlaying=false;
-
-document.addEventListener("DOMContentLoaded",function() {
-  zAlbumArt();
-},false);
 
 function zMute() {
   zPlayer.muted=!zPlayer.muted;
@@ -71,15 +67,11 @@ function convertTime(sec) {
 function zAlbumArt() {
 
   var currentArtist = zPlayer.getAttribute('data-artist');
-  document.getElementById('artist').innerHTML = "Artist: "+currentArtist;
 
   var currentAlbum = zPlayer.getAttribute('data-album');
-  document.getElementById('album').innerHTML = "Album: "+currentAlbum;
 
   var url = "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+
-    lastfmAPIkey+"&artist="+
-    currentArtist+"&album="+
-    currentAlbum;
+    lastfmAPIkey+"&artist="+currentArtist+"&album="+currentAlbum;
 
   var xmlhttp;
   var txt,x,xx,i;
