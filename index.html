@@ -13,14 +13,13 @@
 </head>
 <body>
   <header>
-  <h3>Vesper: HTML5 Audio player</h3> <p>Fully featured music player only 14kb! Now with Last.fm artworks</p>
+  <h3>Vesper: HTML5 Audio player</h3> <p>Fully featured music player only 14kb!</p>
         <a href="https://github.com/FireZenk/html5player"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
   </header>
   <div class="content">
   	
   	<div class="audio-set">
-        <audio id="player" src="music/sample.mp3" controlls="controlls" ontimeupdate="zTimeUpdate()" 
-          data-artist="Rihanna" data-album="Good Girl Gone Bad"></audio>
+        <audio id="player" src="http://localhost:8888/test/music/sample.mp3" controlls="controlls" ontimeupdate="zTimeUpdate()"></audio>
 
         <div id="art" class="audio-art"></div>
 
@@ -46,10 +45,20 @@
         <a href="http://firezenk.github.com/html5player/"><div class="brand">vesper</div></a>
     </div>
 
+    <h4>Features:</h4>
+    <ul>
+      <li>Fully styled audio player</li>
+      <li>Auto load artworks using last.fm</li>
+      <li>Auto load audio info using ID3 tags</li>
+    </ul>
+
+    <hr/>
+
     <h4>Import code:</h4>
     <h6>Place this between head tag:</h6>
     <pre><code data-language="html">
       <link rel="stylesheet" type="text/css" href="css/vesper.min.css">
+      &lt;script src="js/vendor/id3.min.js"&gt;</script>
       <script src="js/vesper.min.js"></script>
     </code></pre>
 
@@ -58,8 +67,7 @@
     <h6>Place it where you want the widget:</h6>
     <pre><code data-language="html">
     <div class="audio-set">
-        <audio id="player" src="music/sample.mp3" controlls="controlls" ontimeupdate="zTimeUpdate()" 
-          data-artist="Rihanna" data-album="Good Girl Gone Bad"></audio>
+        <audio id="player" src="music/sample.mp3" controlls="controlls" ontimeupdate="zTimeUpdate()"></audio>
 
         <div id="art" class="audio-art"></div>
 
@@ -86,8 +94,26 @@
     </div>
     </code></pre>
 
-    <a href="css/vesper.min.css"><button>Download css <icon>download</icon></button></a>
-    <a href="js/vesper.min.js"><button>Download js <icon>download</icon></button></a>
+    <h4>JavaScript code:<h/4>
+    <h6>Place it just before &lt;/body&gt;:</h6>
+    <pre><code data-language="html">
+    <script type="text/javascript">
+      var filename = document.getElementById('player').getAttribute('src');
+
+      ID3.loadTags(filename, function() {
+        var tags = ID3.getAllTags(filename);
+
+        document.getElementById('artist').innerHTML = "Artist: "+tags.artist;
+        document.getElementById('player').setAttribute('data-artist', tags.artist);
+        document.getElementById('album').innerHTML = "Album: "+tags.album;
+        document.getElementById('player').setAttribute('data-album', tags.album);
+
+        zAlbumArt();
+      },{tags: ["artist","album"]});
+    </script>
+    </code></pre>
+
+    <a href="https://github.com/FireZenk/html5player/archive/master.zip"><button>Download zip <icon>download</icon></button></a>
     <a href="https://github.com/FireZenk/html5player"><button>Source code <icon>external</icon></button></a>
 
     <br/><br/>
@@ -95,7 +121,22 @@
   <footer>
   Vesper: HTML5 Audio player, 2013 &copy; FireZenk
   </footer>
+  <script src="js/vendor/id3.min.js"></script>
   <script src="js/vesper.min.js"></script>
-  <script src="js/rainbow.min.js"></script>
+  <script type="text/javascript">
+    var filename = document.getElementById('player').getAttribute('src');
+
+    ID3.loadTags(filename, function() {
+      var tags = ID3.getAllTags(filename);
+
+      document.getElementById('artist').innerHTML = "Artist: "+tags.artist;
+      document.getElementById('player').setAttribute('data-artist', tags.artist);
+      document.getElementById('album').innerHTML = "Album: "+tags.album;
+      document.getElementById('player').setAttribute('data-album', tags.album);
+
+      zAlbumArt();
+    },{tags: ["artist","album"]});
+  </script>
+  <script src="js/vendor/rainbow.min.js"></script>
 </body>
 </html>
