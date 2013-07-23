@@ -10,6 +10,11 @@
 <link rel="stylesheet" type="text/css" href="css/rainbow.min.css">
 <!-- Style -->
 <link rel="stylesheet" type="text/css" href="css/style.min.css">
+<!-- WaveSurfer -->
+<script src="js/vendor/observer.js"></script>
+<script src="js/vendor/wavesurfer.js"></script>
+<script src="js/vendor/webaudio.js"></script>
+<script src="js/vendor/drawer.js"></script>
 </head>
 <body>
   <header>
@@ -19,8 +24,9 @@
     addthis.bar.initialize({'default':{"backgroundColor":"#F8F8F8","buttonColor":"#09A9F4","textColor":"#696969","buttonTextColor":"#f8f8f8"},rules:[{"name":"Twitter","match":{"referringService":"twitter"},"message":"If you find this project interesting:","action":{"type":"button","text":"Tweet it!","verb":"share","service":"twitter"}},{"name":"Facebook","match":{"referringService":"facebook"},"message":"Tell your friends about this:","action":{"type":"button","text":"Share on Facebook","verb":"share","service":"facebook"}},{"name":"Google","match":{"referrer":"google.com"},"message":"If you like this project, let Google know:","action":{"type":"button","text":"+1","verb":"share","service":"google_plusone_share"}},{"name":"AnyOther","match":{},"message":"If you enjoy this project, do us a favor:","action":{"type":"button","text":"Share this page","verb":"share","service":"preferred"}},{"name":"pinterest","match":{"referringService":"pinterest"},"message":"If you enjoy this project, do us a favor:","action":{"type":"button","text":"Post on Pinterest Pin It","verb":"share","service":"pinterest"}}]});
     </script>
     <!-- AddThis Welcome END -->
-    <h3>Vesper: HTML5 Audio player</h3> <p>Fully featured music player only 14kb!</p>
-        <a href="https://github.com/FireZenk/html5player"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <h3>Vesper: HTML5 Audio player</h3> <p>Fully featured music player in pure JavaScript</p>
+        <a href="https://github.com/FireZenk/html5player"><img style="position:absolute;top:0;right:0;border:0;" 
+          src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
   </header>
   <div class="content">
   	
@@ -46,25 +52,43 @@
         <div class="audio-info">
           <span id="artist"></span>
           <span id="album"></span>
+          <div class="waveform"></div>
         </div>
 
         <a href="http://firezenk.github.com/html5player/"><div class="brand">vesper</div></a>
     </div>
 
-    <h4>Features:</h4>
-    <ul>
-      <li>Fully styled audio player</li>
-      <li>Auto load artworks using last.fm</li>
-      <li>Auto load audio info using ID3 tags</li>
-    </ul>
+    <div style="width:100%">
+      <div style="float:left;width:50%">
+        <h4>Features:</h4>
+          <ul>
+            <li>Fully styled audio player</li>
+            <li>Suitable for streaming</li>
+            <li>Wave progress viewer</li>
+            <li>Auto load artworks using last.fm</li>
+            <li>Auto load audio info using ID3 tags</li>
+          </ul>
+      </div>
+      <div style="float:right;width:50%">
+        <h4>Tech details:</h4>
+        <ul>
+          <li>Written in pure <i>JavaScript</i> and <i>LESS</i></li>
+          <li>Compatible with <icon>chrome</icon> & <icon>firefox</icon></li>
+        </ul>
+      </div>
+    </div>
 
-    <hr/>
+    <hr style="clear:both"/>
 
     <h4>Import code:</h4>
     <h6>Place this between head tag:</h6>
     <pre><code data-language="html">
       <link rel="stylesheet" type="text/css" href="css/vesper.min.css">
-      &lt;script src="js/vendor/id3.min.js"&gt;</script>
+      &lt;script src="js/vendor/id3.min.js"&gt;&lt;/script&gt;
+      <script src="js/vendor/observer.js"></script>
+      <script src="js/vendor/wavesurfer.js"></script>
+      <script src="js/vendor/webaudio.js"></script>
+      <script src="js/vendor/drawer.js"></script>
       <script src="js/vesper.min.js"></script>
     </code></pre>
 
@@ -94,29 +118,11 @@
         <div class="audio-info">
           <span id="artist"></span>
           <span id="album"></span>
+          <div class="waveform"></div>
         </div>
 
         <a href="http://firezenk.github.com/html5player/"><div class="brand">vesper</div></a>
     </div>
-    </code></pre>
-
-    <h4>JavaScript code:<h/4>
-    <h6>Place it just before &lt;/body&gt;:</h6>
-    <pre><code data-language="html">
-    <script type="text/javascript">
-      var filename = document.getElementById('player').getAttribute('src');
-
-      ID3.loadTags(filename, function() {
-        var tags = ID3.getAllTags(filename);
-
-        document.getElementById('artist').innerHTML = "Artist: "+tags.artist;
-        document.getElementById('player').setAttribute('data-artist', tags.artist);
-        document.getElementById('album').innerHTML = "Album: "+tags.album;
-        document.getElementById('player').setAttribute('data-album', tags.album);
-
-        zAlbumArt();
-      },{tags: ["artist","album"]});
-    </script>
     </code></pre>
 
     <a href="https://github.com/FireZenk/html5player/archive/master.zip"><button>Download zip <icon>download</icon></button></a>
@@ -129,20 +135,6 @@
   </footer>
   <script src="js/vendor/id3.min.js"></script>
   <script src="js/vesper.min.js"></script>
-  <script type="text/javascript">
-    var filename = document.getElementById('player').getAttribute('src');
-
-    ID3.loadTags(filename, function() {
-      var tags = ID3.getAllTags(filename);
-
-      document.getElementById('artist').innerHTML = "Artist: "+tags.artist;
-      document.getElementById('player').setAttribute('data-artist', tags.artist);
-      document.getElementById('album').innerHTML = "Album: "+tags.album;
-      document.getElementById('player').setAttribute('data-album', tags.album);
-
-      zAlbumArt();
-    },{tags: ["artist","album"]});
-  </script>
   <script src="js/vendor/rainbow.min.js"></script>
 </body>
 </html>
